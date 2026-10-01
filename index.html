@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Receipt - UI Card</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f7f6fa;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 32px 16px;
+      color: #1f2937;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Main Receipt Card */
+    .receipt-card {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    /* Top Vibrant Gradient Header */
+    .card-header {
+      background: linear-gradient(90deg, #aa33f5 0%, #ee5273 50%, #f9ba15 100%);
+      padding: 28px 24px 22px 24px;
+      color: #ffffff;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-top h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .header-top .time {
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0.95;
+    }
+
+    .header-date {
+      font-size: 0.85rem;
+      margin-top: 4px;
+      opacity: 0.9;
+    }
+
+    /* Card Details Section */
+    .card-body {
+      padding: 24px 24px 8px 24px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid #f1f2f6;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: #7d8495;
+      font-size: 0.95rem;
+      font-weight: 400;
+    }
+
+    .detail-value {
+      text-align: right;
+    }
+
+    .detail-value .name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .detail-value .subtext {
+      font-size: 0.82rem;
+      color: #4b5563;
+      margin-top: 3px;
+      letter-spacing: 0.3px;
+    }
+
+    .status-badge {
+      color: #10b981;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Perforated Divider with Side Notches */
+    .ticket-divider {
+      position: relative;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cutout-left, .cutout-right {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background-color: #f7f6fa; /* Seamless match with page background */
+      border-radius: 50%;
+      top: 2px;
+    }
+
+    .cutout-left {
+      left: -12px;
+    }
+
+    .cutout-right {
+      right: -12px;
+    }
+
+    .perforation-dots {
+      width: 80%;
+      border-bottom: 2.5px dotted #dcdde1;
+    }
+
+    /* Bottom Amount Section */
+    .card-amount-section {
+      padding: 20px 24px 28px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .amount-label {
+      font-size: 0.9rem;
+      color: #6b7280;
+      line-height: 1.25;
+      font-weight: 500;
+    }
+
+    .amount-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.5px;
+    }
+
+    /* Centered Footer Section */
+    .page-footer {
+      margin-top: 160px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 320px;
+    }
+
+    .brand-icon-box {
+      width: 68px;
+      height: 48px;
+      background: #026bb4;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.82rem;
+      color: #6b7280;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .footer-link {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #111827;
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Receipt Card -->
+    <div class="receipt-card">
+      
+      <!-- Gradient Header -->
+      <div class="card-header">
+        <div class="header-top">
+          <h1>Transaction Details</h1>
+          <span class="time">10:55 AM</span>
+        </div>
+        <div class="header-date">29 September, 2026</div>
+      </div>
+
+      <!-- Card Details Rows -->
+      <div class="card-body">
+        <div class="detail-row">
+          <span class="detail-label">From</span>
+          <div class="detail-value">
+            <div class="name">Noor Fatima</div>
+            <div class="subtext">339381681</div>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">To</span>
+          <div class="detail-value">
+            <div class="name">1bill</div>
+            <div class="subtext">10023600255300198046</div>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Status</span>
+          <div class="detail-value">
+            <span class="status-badge">Paid</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ticket Cutouts & Dotted Line -->
+      <div class="ticket-divider">
+        <div class="cutout-left"></div>
+        <div class="perforation-dots"></div>
+        <div class="cutout-right"></div>
+      </div>
+
+      <!-- Total Amount Section -->
+      <div class="card-amount-section">
+        <div class="amount-label">
+          Amount<br>Debited
+        </div>
+        <div class="amount-value">
+          Rs. 1,50,000
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Page Footer Area -->
+    <footer class="page-footer">
+      <div class="brand-icon-box">
+        DIGITAL
+      </div>
+      <p class="footer-disclaimer">
+        For latest schedule of charges, kindly visit your branch or official digital website.
+      </p>
+      <a href="#" class="footer-link">www.digital.example.com</a>
+    </footer>
+  </div>
+
+</body>
+</html>
